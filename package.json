@@ -1,0 +1,19 @@
+{
+  "name": "react-ssr-example",
+  "version": "1.0.0",
+  "description": "Example universal app for the blog post purpose.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/burczu/react-ssr-example.git"
+  },
+  "author": "Bartłomiej Dybowski <b.dybowski@gmail.com> (http://frontendinsights.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/burczu/react-ssr-example/issues"
+  },
+  "homepage": "https://github.com/burczu/react-ssr-example#readme"
+}
