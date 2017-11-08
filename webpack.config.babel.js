@@ -1,6 +1,7 @@
 
 import path from 'path';
 import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const isDebug = !process.argv.includes('--release');
 
@@ -13,7 +14,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: isDebug ? '[name].js' : '[name].[chunkhas:8].js'
+    filename: isDebug ? '[name].js' : '[name].[chunkhash:8].js'
   },
 
   module: {
@@ -42,9 +43,15 @@ const config = {
       minChunks: module => /node_modules/.test(module.resource)
     }),
     ...isDebug ? [] : [
-      new webpack.optimize.UglifyJsPlugin()
-    ]
-  ]
+      new webpack.optimize.UglifyJsPlugin({
+        beautify: true,
+        comments: false
+      })
+    ],
+    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') })
+  ],
+
+  devtool: isDebug ? 'cheap-module-source-map' : false
 }
 
 export default config;
