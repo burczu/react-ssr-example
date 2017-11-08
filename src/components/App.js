@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import isNode from 'is-node';
 
 class App extends React.Component {
   static propTypes = {
-    initalText: PropTypes.string.isRequired
+    initalText: PropTypes.string
   }
 
   constructor(props) {
     super(props);
-    this.state = { text: this.props.initalText };
+    if (isNode) {
+      this.state = { text: this.props.initalText };
+    }
   }
 
   onButtonClick(event) {
