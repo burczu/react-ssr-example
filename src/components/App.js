@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class App extends React.Component {
+  static propTypes = {
+    initalText: PropTypes.string.isRequired
+  }
+
   constructor(props) {
     super(props);
-    this.state = { text: 'redendered on the server!' };
+    this.state = { text: this.props.initalText };
   }
 
   onButtonClick(event) {
