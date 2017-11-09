@@ -13,8 +13,10 @@ app.use(express.static(path.join(__dirname)));
 app.get('*', async (req, res, next) => {
   const scripts = ['vendor.js', 'client.js'];
 
-  const appMarkup = ReactDOMServer.renderToString(<App initalText="rendered on the server" />);
-  const html = ReactDOMServer.renderToStaticMarkup(<Html children={appMarkup} scripts={scripts} />);
+  const initialState = { initialText: "rendered on the server" };
+
+  const appMarkup = ReactDOMServer.renderToString(<App {...initialState} />);
+  const html = ReactDOMServer.renderToStaticMarkup(<Html children={appMarkup} scripts={scripts} initialState={initialState} />);
 
   res.send(`<!doctype html>${html}`);
 });

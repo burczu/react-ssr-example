@@ -4,7 +4,8 @@
   "description": "Example universal app for the blog post purpose.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack && node ./build/server.js"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,6 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "express": "^4.16.2",
-    "is-node": "^1.0.2",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",

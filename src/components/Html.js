@@ -1,7 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Html extends React.Component {
+  static propTypes = {
+    children: PropTypes.node.isRequired,
+    initialState: PropTypes.object,
+    scripts: PropTypes.array
+  }
+
   render () {
+    const { children, initialState, scripts } = this.props;
+
     return (
       <html>
         <head>
@@ -10,9 +19,16 @@ class Html extends React.Component {
         </head>
         <body>
           <div id="app"
-               dangerouslySetInnerHTML={{ __html: this.props.children }}
+               dangerouslySetInnerHTML={{ __html: children }}
           ></div>
-          {this.props.scripts.map((item, index) => {
+          {initialState && (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.APP_STATE=${JSON.stringify(initialState)}`
+              }}
+            ></script>
+          )}
+          {scripts.map((item, index) => {
             return <script key={index} src={item}></script>;
           })}
         </body>
