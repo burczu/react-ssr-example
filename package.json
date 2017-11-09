@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack && node ./build/server.js"
+    "clear": "rimraf ./build",
+    "start": "npm run clear && webpack && node ./build/server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "html-webpack-plugin": "^2.30.1",
+    "rimraf": "^2.6.2",
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0"
   },
