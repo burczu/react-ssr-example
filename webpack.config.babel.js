@@ -1,7 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
-// import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const common = {
   module: {
@@ -44,7 +43,6 @@ const clientConfig = {
       name: 'vendor',
       minChunks: module => /node_modules/.test(module.resource)
     }),
-    // new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') })
   ],
 
   devtool: 'cheap-module-source-map',

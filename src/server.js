@@ -10,7 +10,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname)));
 
-app.get('*', async (req, res, next) => {
+app.get('*', async (req, res) => {
   const scripts = ['vendor.js', 'client.js'];
 
   const initialState = { initialText: "rendered on the server" };
