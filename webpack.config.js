@@ -1,6 +1,5 @@
-import path from 'path';
-import webpack from 'webpack';
-import nodeExternals from 'webpack-node-externals';
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 const common = {
   module: {
@@ -11,25 +10,29 @@ const common = {
         include: [path.resolve(__dirname, 'src')],
         query: {
           presets: [
-            'env',
-            'stage-2',
-            'react'
+            '@babel/preset-env',
+            '@babel/preset-react',
+          ],
+          plugins: [
+            '@babel/plugin-proposal-class-properties',
           ]
         }
       }
     ]
   }
-}
+};
 
 const clientConfig = {
   ...common,
+
+  mode: 'development',
 
   name: 'client',
   target: 'web',
 
   entry: {
     client: [
-      'babel-polyfill',
+      '@babel/polyfill',
       './src/client.js'
     ]
   },
@@ -38,12 +41,16 @@ const clientConfig = {
     filename: '[name].js'
   },
 
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: module => /node_modules/.test(module.resource)
-    }),
-  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          test: module => /node_modules/.test(module.resource)
+        },
+      },
+    }
+  },
 
   devtool: 'cheap-module-source-map',
 
@@ -52,17 +59,19 @@ const clientConfig = {
     net: 'empty',
     tls: 'empty',
   }
-}
+};
 
 const serverConfig = {
   ...common,
+
+  mode: 'development',
 
   name: 'server',
   target: 'node',
   externals: [nodeExternals()],
 
   entry: {
-    server: ['babel-polyfill', path.resolve(__dirname, 'src', 'server.js')]
+    server: ['@babel/polyfill', path.resolve(__dirname, 'src', 'server.js')]
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -79,6 +88,6 @@ const serverConfig = {
     __filename: false,
     __dirname: false,
   }
-}
+};
 
-export default [clientConfig, serverConfig];
+module.exports = [clientConfig, serverConfig];
